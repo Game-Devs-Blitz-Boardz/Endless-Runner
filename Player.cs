@@ -24,4 +24,10 @@ public class Player : MonoBehaviour
         transform.position = new Vector3(limitedX, transform.position.y, transform.position.z);
 
     }
+
+    private void OnTriggerEnter(Collider other) {
+        if (other.tag == "Enemy") {
+            GameManager.instance.ReloadScene();
+        }
+    }
 }
