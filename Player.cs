@@ -8,14 +8,12 @@ public class Player : MonoBehaviour
 
     public float maxX = 1.5f;
 
-    void Start()
-    {
-        
-    }
-
     void Update()
     {
+
         xInput = Input.GetAxis("Horizontal");
+        
+        TouchInput();
 
         transform.Translate(xInput * dodgeSpeed * Time.deltaTime, 0, 0);
 
@@ -23,6 +21,18 @@ public class Player : MonoBehaviour
 
         transform.position = new Vector3(limitedX, transform.position.y, transform.position.z);
 
+    }
+
+    void TouchInput() {
+        if (Input.GetMouseButton(0)) {
+            Vector3 touchPos = Input.mousePosition;
+            float middle = Screen.width / 2;
+            if (touchPos.x < middle) {
+                xInput = -1;
+            } else if (touchPos.x > middle) {
+                xInput = 1;
+            }
+        }
     }
 
     private void OnTriggerEnter(Collider other) {
