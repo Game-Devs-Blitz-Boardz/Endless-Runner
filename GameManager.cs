@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     public float spawnRate = 0.8f;
     int score = 0;
     public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI startText;
     bool gameStarted = false;
 
 
@@ -27,10 +28,12 @@ public class GameManager : MonoBehaviour
     {
         score = 0;
         scoreText.gameObject.SetActive(false);
+        startText.gameObject.SetActive(true);
     }
 
     void Update() {
         if (Input.anyKeyDown && !gameStarted) {
+            startText.gameObject.SetActive(false);
             scoreText.gameObject.SetActive(true);
             gameStarted = true;
             StartCoroutine(SpawnEnemies());
