@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -9,8 +10,10 @@ public class GameManager : MonoBehaviour
 
     public GameObject enemyPrefab;
     public Transform spawnPoint;
-    public float maxSpaqwnPointX = 1.5f;
+    public float maxSpawnPointX = 1.5f;
     public float spawnRate = 0.8f;
+    int score = 0;
+    public TextMeshProUGUI scoreText;
 
 
     void Awake()
@@ -21,6 +24,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        score = 0;
         StartCoroutine(SpawnEnemies());
     }
 
@@ -34,7 +38,7 @@ public class GameManager : MonoBehaviour
 
     public void Spawn() {
 
-        float randomSpawnX = Random.Range(-maxSpaqwnPointX, maxSpaqwnPointX);
+        float randomSpawnX = Random.Range(-maxSpawnPointX, maxSpawnPointX);
 
         Vector3 enemySpawnPos = spawnPoint.position;
         enemySpawnPos.x = randomSpawnX;
@@ -44,5 +48,10 @@ public class GameManager : MonoBehaviour
     
     public void ReloadScene() {
         SceneManager.LoadScene("Game");
+    }
+
+    public void ScoreUp() {
+        score++;
+        scoreText.text = score.ToString();
     }
 }
