@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     int score = 0;
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI startText;
+    public TextMeshProUGUI nameText;
     bool gameStarted = false;
 
 
@@ -29,11 +30,13 @@ public class GameManager : MonoBehaviour
         score = 0;
         scoreText.gameObject.SetActive(false);
         startText.gameObject.SetActive(true);
+        nameText.gameObject.SetActive(true);
     }
 
     void Update() {
         if (Input.anyKeyDown && !gameStarted) {
             startText.gameObject.SetActive(false);
+            nameText.gameObject.SetActive(false);
             scoreText.gameObject.SetActive(true);
             gameStarted = true;
             StartCoroutine(SpawnEnemies());
