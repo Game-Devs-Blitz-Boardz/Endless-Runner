@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     public float spawnRate = 0.8f;
     int score = 0;
     public TextMeshProUGUI scoreText;
+    bool gameStarted = false;
 
 
     void Awake()
@@ -25,7 +26,15 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         score = 0;
-        StartCoroutine(SpawnEnemies());
+        scoreText.gameObject.SetActive(false);
+    }
+
+    void Update() {
+        if (Input.anyKeyDown && !gameStarted) {
+            scoreText.gameObject.SetActive(true);
+            gameStarted = true;
+            StartCoroutine(SpawnEnemies());
+        }
     }
 
     IEnumerator SpawnEnemies() {
